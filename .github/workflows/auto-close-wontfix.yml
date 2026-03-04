@@ -2,11 +2,11 @@ name: Auto-close wontfix issues
 
 on:
   issues:
-    types: [labeled]
+    types: [labeled, opened]
 
 jobs:
   close-wontfix:
-    if: github.event.label.name == 'wontfix'
+    if: github.event.label.name == 'wontfix' || contains(github.event.issue.labels.*.name, 'wontfix')
     runs-on: ubuntu-latest
     steps:
       - name: Close issue
